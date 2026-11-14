@@ -6,7 +6,7 @@ import random
 from contextlib import closing
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 from sieve import db
 from sieve.models import Alert, Channel, Customer, Direction, Segment, Transaction

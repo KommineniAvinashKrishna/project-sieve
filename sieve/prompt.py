@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 from typing import List
 
 from sieve.models import EvidencePack, ReasonCode
@@ -67,9 +68,9 @@ def build_prompt(pack: EvidencePack, reason_codes: List[ReasonCode]) -> str:
                 meta.get("direction"),
                 meta.get("channel"),
                 item.value,
-                meta.get("counterparty_name"),
+                html.escape(str(meta.get("counterparty_name")), quote=False),
                 meta.get("counterparty_country"),
-                meta.get("narration"),
+                html.escape(str(meta.get("narration")), quote=False),
             )
         )
     lines.append("</data>")

@@ -33,7 +33,8 @@
     },
     "RC_BENIGN_EMPLOYER_SALARY": {
       "weight": -0.35,
-      "income_tolerance_pct": 35
+      "income_tolerance_pct": 35,
+      "max_other_credit_pct_of_income": 50
     },
     "RC_BENIGN_SEASONAL_CASH": {
       "weight": -0.35,

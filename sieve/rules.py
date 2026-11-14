@@ -93,7 +93,8 @@ def rule_benign_employer_salary(pack: EvidencePack, cfg: Config) -> Optional[Lis
     income = int(kyc["KYC.declared_monthly_income_inr"].value)
     if employer == "Self" or income <= 0:
         return None
-    if float(facts["F.credits_to_declared_income_ratio"].value) >= 5.0:
+    high_ratio = float(cfg.params("RC_CREDITS_GT_5X_INCOME")["multiple"])
+    if float(facts["F.credits_to_declared_income_ratio"].value) >= high_ratio:
         return None
     tolerance = float(params["income_tolerance_pct"]) / 100.0
     salary_txns = [
@@ -112,7 +113,8 @@ def rule_benign_employer_salary(pack: EvidencePack, cfg: Config) -> Optional[Lis
         for txn in _txns(pack)
         if txn.meta["direction"] == Direction.CR.value and txn.id not in salary_ids
     )
-    if other_credit_total >= 0.5 * income:
+    other_credit_cap = float(params["max_other_credit_pct_of_income"]) / 100.0
+    if other_credit_total >= other_credit_cap * income:
         return None
     high_risk = cfg.params("RC_HIGH_RISK_COUNTRY_FLOW")
     if any(
