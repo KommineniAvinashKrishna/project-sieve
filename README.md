@@ -74,7 +74,7 @@ eval/
   split.py         deterministic stratified dev(40)/test(60) split
   metrics.py       pure precision/recall/F1 + confusion matrix
   run.py           rules-only vs rules+LLM report
-tests/             53 offline tests
+tests/             54 offline tests
 config/thresholds.json
 ```
 
@@ -110,7 +110,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 python -m sieve.generate --seed 7  # dataset + labels
-pytest -q                          # 53 offline tests, no API key needed
+pytest -q                          # 54 offline tests, no API key needed
 
 python -m sieve.triage --all --provider fake --out runs/fake.jsonl
 python -m eval.run --provider fake # writes eval/report.json and prints a table
@@ -241,7 +241,7 @@ python -m eval.run --provider fake && cmp /tmp/r1.json eval/report.json && echo 
 
 ## Tests
 
-`pytest -q` → **53 passed**, fully offline, no API keys. Highlights: generator determinism and
+`pytest -q` → **54 passed**, fully offline, no API keys. Highlights: generator determinism and
 label isolation, firing/non-firing cases for all 8 reason codes, 8-case numeric-faithfulness
 table, fault modes through the HTTP endpoint (no 500s), citation resolution against the evidence
 endpoint, prompt-injection placement, QA-sample determinism, review 422/409 flows, one audit row

@@ -192,13 +192,15 @@ def run_eval(
     for alert_id in test_ids:
         result = results[alert_id]
         errors = result.grounding.errors
-        cite_fail = any(error.startswith("CITATION") for error in errors)
-        number_fail = any(error.startswith("NUMERIC") for error in errors)
-        if not result.grounding.passed or cite_fail:
+        # A provider failure leaves no narrative to verify, so it counts against both rates.
+        provider_fail = any(error.startswith("PROVIDER") for error in errors)
+        cite_fail = provider_fail or any(error.startswith("CITATION") for error in errors)
+        number_fail = provider_fail or any(error.startswith("NUMERIC") for error in errors)
+        if cite_fail:
             citation_errors += 1
         else:
             citation_ok += 1
-        if not result.grounding.passed or number_fail:
+        if number_fail:
             numeric_errors += 1
         else:
             numeric_ok += 1
