@@ -5,9 +5,9 @@ each alert, scores it with transparent config-driven rules, asks an LLM for a di
 a **cited** narrative, refuses to close anything whose narrative is not fully grounded in the
 evidence, and routes uncertain cases to a human review queue with an append-only audit trail.
 
-The design rule throughout: **the LLM never sees raw data and never has the final word.** It
-re-words a deterministic evidence pack; code validates every citation and every number before
-an alert can be closed.
+The design rule throughout: **the LLM sees only a frozen evidence pack and never has the final
+word.** It re-words that pack; code validates every citation and every number before an alert
+can be closed.
 
 ## What is in the repo
 
@@ -18,6 +18,9 @@ an alert can be closed.
 | 3 — Human loop | Routing policy, QA sampling, review API, append-only audit table, metrics endpoint |
 
 ## Architecture
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the full module design, data flow, invariants and
+extension points.
 
 ```
                        ┌──────────────────────────────┐

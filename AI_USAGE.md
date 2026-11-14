@@ -47,7 +47,7 @@ triage path.
 
 ## What I verified by hand
 
-- `pytest -q` passes offline with no keys (53 tests).
+- `pytest -q` passes offline with no keys (54 tests).
 - Generator labels are byte-identical across runs; row counts match.
 - `grep -rn "labels.jsonl" sieve eval` shows only the generator and `eval/` touch labels.
 - Every endpoint was exercised with `TestClient` (404s, 409s, 422s, faulty provider modes) and
