@@ -11,7 +11,7 @@ from sieve.config import load_config
 from sieve.evidence import build_evidence_pack
 from sieve.models import Disposition, Route
 from sieve.providers.fake import FakeProvider
-from sieve.routing import decide_route, is_qa_sample
+from sieve.routing import decide_route
 from sieve.rules import evaluate_rules
 
 
@@ -55,8 +55,24 @@ def test_routing_policy_boundaries():
 def test_qa_sample_is_deterministic_and_about_ten_percent():
     cfg = load_config()
     ids = ["ALERT-%06d" % i for i in range(1, 2001)]
-    first = [alert_id for alert_id in ids if is_qa_sample(alert_id, cfg)]
-    second = [alert_id for alert_id in ids if is_qa_sample(alert_id, cfg)]
+
+    def sampled_ids():
+        return [
+            alert_id
+            for alert_id in ids
+            if decide_route(
+                Disposition.CLOSE_FALSE_POSITIVE,
+                float(cfg.routing["min_confidence"]),
+                True,
+                float(cfg.routing["rule_score_floor"]) - 0.01,
+                alert_id,
+                cfg,
+            )
+            == Route.QA_SAMPLE
+        ]
+
+    first = sampled_ids()
+    second = sampled_ids()
     assert first == second
     assert 0.07 <= len(first) / len(ids) <= 0.13
 
