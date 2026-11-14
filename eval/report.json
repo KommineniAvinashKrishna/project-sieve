@@ -1,0 +1,202 @@
+{
+  "config": {
+    "dev_fraction": 0.4,
+    "provider": "fake",
+    "seed": 7,
+    "threshold_grid": [
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
+    ]
+  },
+  "dev": {
+    "rules_only": {
+      "auto_close_rate": 0.5278,
+      "confusion": {
+        "fn": 3,
+        "fp": 23,
+        "tn": 73,
+        "tp": 45
+      },
+      "f1": 0.7759,
+      "n": 144,
+      "precision": 0.6618,
+      "recall": 0.9375
+    },
+    "rules_plus_llm": {
+      "auto_close_rate": 0.1736,
+      "confusion": {
+        "fn": 3,
+        "fp": 4,
+        "tn": 92,
+        "tp": 45
+      },
+      "f1": 0.9278,
+      "n": 144,
+      "precision": 0.9184,
+      "recall": 0.9375
+    }
+  },
+  "narrative_quality": {
+    "citation_validity_rate": 1.0,
+    "narratives": 216,
+    "narratives_with_citation_errors": 0,
+    "narratives_with_numeric_errors": 0,
+    "numeric_faithfulness_rate": 1.0
+  },
+  "per_scenario_test": {
+    "CASH_STRUCTURING": {
+      "n": 72,
+      "rules_only": {
+        "auto_close_rate": 0.6389,
+        "confusion": {
+          "fn": 4,
+          "fp": 0,
+          "tn": 42,
+          "tp": 26
+        },
+        "f1": 0.9286,
+        "n": 72,
+        "precision": 1.0,
+        "recall": 0.8667
+      },
+      "rules_plus_llm": {
+        "auto_close_rate": 0.1667,
+        "confusion": {
+          "fn": 0,
+          "fp": 1,
+          "tn": 41,
+          "tp": 30
+        },
+        "f1": 0.9836,
+        "n": 72,
+        "precision": 0.9677,
+        "recall": 1.0
+      }
+    },
+    "HIGH_RISK_COUNTRY": {
+      "n": 72,
+      "rules_only": {
+        "auto_close_rate": 0.6111,
+        "confusion": {
+          "fn": 0,
+          "fp": 4,
+          "tn": 44,
+          "tp": 24
+        },
+        "f1": 0.9231,
+        "n": 72,
+        "precision": 0.8571,
+        "recall": 1.0
+      },
+      "rules_plus_llm": {
+        "auto_close_rate": 0.0,
+        "confusion": {
+          "fn": 3,
+          "fp": 0,
+          "tn": 48,
+          "tp": 21
+        },
+        "f1": 0.9333,
+        "n": 72,
+        "precision": 1.0,
+        "recall": 0.875
+      }
+    },
+    "INCOME_MISMATCH": {
+      "n": 72,
+      "rules_only": {
+        "auto_close_rate": 0.2917,
+        "confusion": {
+          "fn": 0,
+          "fp": 23,
+          "tn": 21,
+          "tp": 28
+        },
+        "f1": 0.7089,
+        "n": 72,
+        "precision": 0.549,
+        "recall": 1.0
+      },
+      "rules_plus_llm": {
+        "auto_close_rate": 0.25,
+        "confusion": {
+          "fn": 4,
+          "fp": 1,
+          "tn": 43,
+          "tp": 24
+        },
+        "f1": 0.9057,
+        "n": 72,
+        "precision": 0.96,
+        "recall": 0.8571
+      }
+    }
+  },
+  "routing_test": {
+    "auto_close": 27,
+    "auto_close_rate": 0.1389,
+    "human_review": 186,
+    "human_review_rate": 0.8611,
+    "qa_sample": 3,
+    "qa_sample_rate": 0.0139,
+    "routed_recall": 1.0
+  },
+  "rules_only_threshold": {
+    "objective": "max recall, then f1, then higher threshold",
+    "tuned_on": "dev",
+    "value": 0.15
+  },
+  "split": {
+    "by_scenario_dev": {
+      "CASH_STRUCTURING": 48,
+      "HIGH_RISK_COUNTRY": 48,
+      "INCOME_MISMATCH": 48
+    },
+    "by_scenario_test": {
+      "CASH_STRUCTURING": 72,
+      "HIGH_RISK_COUNTRY": 72,
+      "INCOME_MISMATCH": 72
+    },
+    "dev": 144,
+    "test": 216
+  },
+  "test": {
+    "rules_only": {
+      "auto_close_rate": 0.5139,
+      "confusion": {
+        "fn": 4,
+        "fp": 27,
+        "tn": 107,
+        "tp": 78
+      },
+      "f1": 0.8342,
+      "n": 216,
+      "precision": 0.7429,
+      "recall": 0.9512
+    },
+    "rules_plus_llm": {
+      "auto_close_rate": 0.1389,
+      "confusion": {
+        "fn": 7,
+        "fp": 2,
+        "tn": 132,
+        "tp": 75
+      },
+      "f1": 0.9434,
+      "n": 216,
+      "precision": 0.974,
+      "recall": 0.9146
+    }
+  }
+}
